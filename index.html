@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Playbook Digital — Boutique Method IP (JUR Professional)</title>
+
+  <!-- Tailwind (rápido e prático) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome (ícones) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    /* slot quadrado da logo (canto esquerdo) */
+    .bm-logo-slot{
+      width:72px;height:72px;
+      border-radius:12px;
+      background:#fff;
+      display:flex;align-items:center;justify-content:center;
+      padding:10px;
+      box-shadow:0 10px 20px rgba(0,0,0,.10);
+      flex:0 0 auto;
+    }
+    .bm-logo-img{
+      width:100%;height:100%;
+      object-fit:contain;
+      object-position:center;
+      image-rendering:-webkit-optimize-contrast;
+      transform: translateZ(0);
+    }
+  </style>
+</head>
+
+<body class="bg-slate-100 text-slate-900">
+  <!-- HEADER -->
+  <header class="bg-slate-950 text-white">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="bm-logo-slot">
+          <img
+            src="Logo_Boutique_Method_IP_Oficial.jpeg"
+            alt="Logo"
+            class="bm-logo-img"
+            onerror="this.parentElement.innerHTML='<div style=&quot;font-weight:900;color:#0f172a;letter-spacing:.08em&quot;>BMIP</div>'"
+          />
+        </div>
+        <div>
+          <h1 class="text-xl font-extrabold tracking-tight">
+            PLAYBOOK <span class="text-blue-400">METHOD IP</span>
+          </h1>
+          <p class="text-[11px] text-slate-300 uppercase tracking-widest">
+            Base Jurídica Professional v1.0 (120 scripts)
+          </p>
+        </div>
+      </div>
+
+      <!-- Busca -->
+      <div class="relative w-full max-w-md">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Pesquisar situação ou tema…"
+          onkeyup="filterScripts()"
+          class="w-full bg-slate-900/40 border border-slate-700 rounded-2xl py-3 pl-11 pr-4 text-sm text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-10 pb-28">
+    <!-- Diretriz -->
+    <div class="mb-10 bg-white border-l-4 border-amber-400 p-6 rounded-3xl shadow-sm flex gap-4 items-center">
+      <div class="bg-amber-100 p-3 rounded-2xl">
+        <i class="fa-solid fa-triangle-exclamation text-2xl text-amber-600"></i>
+      </div>
+      <div>
+        <div class="text-sm font-black uppercase tracking-widest text-slate-700">Diretriz padrão 10/10</div>
+        <div class="text-slate-600 italic text-sm">
+          “A recepção acolhe e organiza. Nunca preste orientação jurídica técnica ou prometa prazos judiciais.”
+        </div>
+      </div>
+    </div>
+
+    <!-- GRID DE SEÇÕES -->
+    <div id="sectionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      <div onclick="filterBySection('triagem')" class="bg-white p-8 rounded-[2rem] border border-slate-200 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="bg-blue-600 w-12 h-12 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-blue-200">
+          <i class="fa-solid fa-comments"></i>
+        </div>
+        <h3 class="text-lg font-black uppercase text-slate-900">Triagem & Onboarding</h3>
+        <p class="text-slate-500 text-sm mt-2">Situações 001 a 040</p>
+      </div>
+
+      <div onclick="filterBySection('financeiro')" class="bg-white p-8 rounded-[2rem] border border-slate-200 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="bg-emerald-600 w-12 h-12 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-emerald-200">
+          <i class="fa-solid fa-dollar-sign"></i>
+        </div>
+        <h3 class="text-lg font-black uppercase text-slate-900">Honorários & Contratos</h3>
+        <p class="text-slate-500 text-sm mt-2">Situações 041 a 080</p>
+      </div>
+
+      <div onclick="filterBySection('andamento')" class="bg-white p-8 rounded-[2rem] border border-slate-200 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="bg-indigo-600 w-12 h-12 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-indigo-200">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <h3 class="text-lg font-black uppercase text-slate-900">Andamento & Prazos</h3>
+        <p class="text-slate-500 text-sm mt-2">Situações 081 a 120</p>
+      </div>
+    </div>
+
+    <!-- LISTA -->
+    <div id="scriptsContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+  </main>
+
+  <!-- FOOTER FIXO -->
+  <footer class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-200 px-6 py-4 shadow-[0_-10px_25px_rgba(0,0,0,.06)]">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-6">
+      <div class="flex items-center gap-3 text-[11px] text-slate-600 uppercase tracking-widest font-bold">
+        <div class="bm-logo-slot" style="width:44px;height:44px;padding:8px;border-radius:10px;box-shadow:none;">
+          <img src="Logo_Boutique_Method_IP_Oficial.jpeg" alt="Logo" class="bm-logo-img" />
+        </div>
+        <div>
+          <div>BOUTIQUE METHOD IP HOLDING LTDA</div>
+          <div>CNPJ 64.230.265/0001-69 • CEO@BOUTIQUEMETHODIP.COM</div>
+        </div>
+      </div>
+
+      <button onclick="window.print()" class="bg-slate-900 text-white px-6 py-2 rounded-xl text-xs font-black hover:bg-black transition-all flex items-center gap-2">
+        <i class="fa-solid fa-file-pdf"></i> GERAR PDF / IMPRIMIR
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    // ====== DADOS (DEMO) ======
+    // Aqui você vai substituir pelos seus 120 scripts reais.
+    // A regra é: section: triagem/financeiro/andamento
+    const data = [
+      // 001-040
+      {
+        section: "triagem", start: 1, end: 40, color: "border-blue-500", badge: "bg-blue-600", icon: "fa-comments",
+        wa: "Olá, [NOME]! Aqui é [ATENDENTE] da recepção. Para te encaminhar com segurança, posso confirmar: (1) tema, (2) cidade, (3) prazo (se houver)?",
+        voice: "Confirmar dados. Resumir em 1 frase. Informar limite da recepção. Prometer retorno realista."
+      },
+      // 041-080
+      {
+        section: "financeiro", start: 41, end: 80, color: "border-emerald-500", badge: "bg-emerald-600", icon: "fa-dollar-sign",
+        wa: "Olá, [NOME]! Aqui é [ATENDENTE]. Para questões de honorários/contrato, poderia confirmar CPF ou número do contrato, por favor?",
+        voice: "Validar identidade. Confirmar parcela/condição. Encaminhar financeiro/advogado."
+      },
+      // 081-120
+      {
+        section: "andamento", start: 81, end: 120, color: "border-indigo-500", badge: "bg-indigo-600", icon: "fa-clock-rotate-left",
+        wa: "Olá, [NOME]! Sobre andamento: o responsável jurídico está analisando e retornará com a atualização no próximo relatório.",
+        voice: "Consultar sistema. Informar fase. Não prometer prazo. Se urgência, escalar."
+      }
+    ];
+
+    // ====== RENDER ======
+    const container = document.getElementById("scriptsContainer");
+
+    function pad3(n){ return String(n).padStart(3,"0"); }
+
+    function renderAll(){
+      container.innerHTML = "";
+      data.forEach((g, idx) => {
+        // um card por grupo (você pode virar “um por situação” se quiser)
+        const card = document.createElement("div");
+        card.className = `script-item bg-white rounded-3xl border-l-4 ${g.color} p-6 shadow-sm hover:shadow-md transition-all`;
+        card.setAttribute("data-id", `${pad3(g.start)}-${pad3(g.end)}`);
+        card.setAttribute("data-section", g.section);
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-full">
+              Situações ${pad3(g.start)} a ${pad3(g.end)}
+            </span>
+            <div class="${g.badge} w-10 h-10 rounded-2xl flex items-center justify-center text-white">
+              <i class="fa-solid ${g.icon}"></i>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">WhatsApp</span>
+                <button onclick="copyText(this, '${escapeForJS(g.wa)}')" class="text-xs font-black text-slate-500 hover:text-blue-600 transition">
+                  <i class="fa-solid fa-copy"></i> COPIAR
+                </button>
+              </div>
+              <p class="mt-2 text-sm text-slate-800 bg-slate-50 border border-slate-200 rounded-2xl p-4 leading-relaxed">${escapeHTML(g.wa)}</p>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200">
+              <div class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Roteiro telefônico</div>
+              <p class="text-sm text-slate-700 leading-relaxed">${escapeHTML(g.voice)}</p>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // ====== COPIAR ======
+    function copyText(btn, text){
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> COPIADO';
+        setTimeout(()=> btn.innerHTML = original, 1200);
+      });
+    }
+
+    // ====== FILTRO ======
+    function filterScripts(){
+      const val = document.getElementById("searchInput").value.toLowerCase().trim();
+      const items = document.querySelectorAll(".script-item");
+
+      items.forEach(item => {
+        const id = item.getAttribute("data-id").toLowerCase();
+        const section = item.getAttribute("data-section").toLowerCase();
+        const show = (!val) || id.includes(val) || section.includes(val);
+        item.style.display = show ? "block" : "none";
+      });
+
+      document.getElementById("sectionsGrid").style.display = val ? "none" : "grid";
+    }
+
+    function filterBySection(sec){
+      document.getElementById("searchInput").value = sec;
+      filterScripts();
+      // scroll suave até lista
+      document.getElementById("scriptsContainer").scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    // ====== UTIL ======
+    function escapeHTML(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+    function escapeForJS(str){
+      return String(str)
+        .replaceAll("\\","\\\\")
+        .replaceAll("'","\\'")
+        .replaceAll("\n","\\n");
+    }
+
+    window.onload = renderAll;
+  </script>
+</body>
+</html>
